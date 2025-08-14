@@ -1,0 +1,35 @@
+import java.util.*;
+class Solution {
+    public static int maximumPopulation(int[][] logs) {
+        int birth=0 ;int death=0; int life[]=new int[101];
+        for(int i=0;i<logs.length;i++){
+            birth=logs[i][0];
+            death=logs[i][1];
+            life[birth-1950]++;
+            life[death-1950]--;
+
+        }
+        for(int i=1;i<101;i++){
+            life[i]=life[i-1]+life[i];
+        }
+        int maxPOP=0;
+        int maxYear=1950;
+        int currPOP=0;
+        for(int i=0;i<101;i++){
+         currPOP=life[i];
+         if(currPOP>maxPOP){
+            maxPOP=currPOP;
+            maxYear=1950+i;
+         }
+         else if(currPOP==maxPOP){
+         maxYear=(maxYear<(1950+i))? (maxYear) : (1950 + i);
+         }
+        }
+   
+   return maxYear;
+}
+public static void main(String args[]){
+    int logs[][]={{1950,1961},{1960,1971},{1970,1981}};
+   System.out.println(maximumPopulation(logs));
+}
+}
