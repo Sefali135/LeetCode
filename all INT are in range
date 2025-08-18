@@ -22,7 +22,8 @@ class Solution {
             if (r[i] <= 0) { 
                 return false; 
             }
-        }// All numbers are covered
+        }
+      return true;
     }
 
     public static void main(String args[]) {
