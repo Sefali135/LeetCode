@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isCovered(int ranges[][], int left, int right) {
+        int r[] = new int[52]; 
+        int st, end;
+
+        for (int i = 0; i < ranges.length; i++) {
+            st = ranges[i][0]; 
+            end = ranges[i][1]; 
+            r[st]++; 
+            if (end + 1 < r.length) {
+                r[end + 1]--; 
+            }
+        }
+
+        // Calculate the prefix sum to determine coverage
+        for (int i = 1; i < r.length; i++) {
+            r[i] += r[i - 1]; 
+        }
+
+        // Check if all numbers from left to right are covered
+        for (int i = left; i <= right; i++) {
+            if (r[i] <= 0) { 
+                return false; 
+            }
+        }// All numbers are covered
+    }
+
+    public static void main(String args[]) {
+        Solution solution = new Solution(); 
+        int ranges[][] = {{1, 10}, {10, 20}};
+        System.out.println(solution.isCovered(ranges, 2, 5));
+    }
+}
