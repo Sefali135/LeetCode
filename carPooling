@@ -1,0 +1,35 @@
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        int r[] = new int[1001];
+        int pas, st, end;
+
+        
+        for (int i = 0; i < trips.length; i++) {
+            pas = trips[i][0]; 
+            st = trips[i][1];  
+            end = trips[i][2]; 
+            r[st] += pas;      
+            if (end < r.length) {
+                r[end] -= pas; // Decrement passengers after end
+            }
+        }
+
+        for (int i = 1; i < r.length; i++) {
+            r[i] += r[i - 1]; // Update the number of passengers
+        }
+
+      
+        for (int i = 0; i < r.length; i++) {
+            if (r[i] > capacity) {
+                return false;
+            }
+        }
+        return true; 
+    }
+
+    public static void main(String args[]) {
+        Solution solution = new Solution(); 
+        int[][] trips = {{2, 1, 5}, {3, 3, 7}}; 
+        System.out.println(solution.carPooling(trips, 5));
+    }
+}
