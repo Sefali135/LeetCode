@@ -1,0 +1,52 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution{
+
+    public int numUniqueEmails(String[] emails) {
+        Set<String> solution = new HashSet<>();
+
+        for (String email : emails) {
+            String[] parts = email.split("@");
+            String localName = parts[0];
+            String domainName = parts[1];
+
+            
+            int plusIndex = localName.indexOf('+');
+            if (plusIndex != -1) {
+                localName = localName.substring(0, plusIndex);
+            }
+            localName = localName.replace(".", "");
+
+        
+            String canonicalEmail = localName + "@" + domainName;
+            solution.add(canonicalEmail);
+        }
+
+        return solution.size();
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        
+        String[] emails1 = {"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"};
+        // System.out.println("Input: " + java.util.Arrays.toString(emails1));
+         System.out.print("Input: [");
+        for (int i = 0; i < emails1.length; i++) {
+            System.out.print("\"" + emails1[i] + "\"");
+            if (i < emails1.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Output: " + solution.numUniqueEmails(emails1));
+        System.out.println("---");
+
+        
+        String[] emails2 = {"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"};
+        System.out.println("Input: " + java.util.Arrays.toString(emails2));
+        System.out.println("Output: " + solution.numUniqueEmails(emails2)); 
+        System.out.println("---");
+    }
+}
