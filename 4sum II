@@ -1,0 +1,23 @@
+ public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+
+        Map<Integer, Integer> sumABFrequencies = new HashMap<>();
+        int count = 0;
+        for (int a : nums1) {
+            for (int b : nums2) {
+                int sum = a + b;
+              
+                sumABFrequencies.put(sum, sumABFrequencies.getOrDefault(sum, 0) + 1);
+            }
+        }
+
+        for (int c : nums3) {
+            for (int d : nums4) {
+                int sumCD = c + d;
+                int targetComplement = -sumCD;
+                count += sumABFrequencies.getOrDefault(targetComplement, 0);
+            }
+        }
+
+        return count;
+    
+    }
