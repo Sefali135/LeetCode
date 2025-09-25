@@ -1,0 +1,14 @@
+ public int numPairsDivisibleBy60(int[] time) {
+         Map<Integer, Integer> remainderMap = new HashMap<>(); 
+        int pairCount = 0;
+
+        for (int duration : time) {
+            int remainder = duration % 60;
+            int complement = (60 - remainder) % 60;
+
+            pairCount += remainderMap.getOrDefault(complement, 0);
+            remainderMap.put(remainder, remainderMap.getOrDefault(remainder, 0) + 1);
+        }
+
+        return pairCount;    
+    }
