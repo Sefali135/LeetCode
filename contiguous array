@@ -1,0 +1,24 @@
+public int findMaxLength(int[] nums) {
+        Map<Integer, Integer> sumIndexMap = new HashMap<>();
+        
+        sumIndexMap.put(0, -1);
+        
+        int maxLen = 0;
+        int count = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            count += (nums[i] == 1 ? 1 : -1);
+            
+            if (sumIndexMap.containsKey(count)) {
+                int previousIndex = sumIndexMap.get(count);
+                
+                int currentLength = i - previousIndex;
+                
+                maxLen = Math.max(maxLen, currentLength);
+            } else {
+                sumIndexMap.put(count, i);
+            }
+        }
+        
+        return maxLen;
+    }
