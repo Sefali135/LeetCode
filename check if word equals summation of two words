@@ -1,0 +1,18 @@
+class Solution {
+    private int getNumericalValueOptimized(String word) {
+        int numericalValue = 0;
+        for (char c : word.toCharArray()) {
+            int digit = c - 'a';
+            numericalValue = numericalValue * 10 + digit;
+        }
+        return numericalValue;
+    }
+
+    public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+        int value1 = getNumericalValueOptimized(firstWord);
+        int value2 = getNumericalValueOptimized(secondWord);
+        int valueTarget = getNumericalValueOptimized(targetWord);
+        
+        return value1 + value2 == valueTarget;
+    }
+}
